@@ -6,4 +6,5 @@ werkzeug==3.0.1
 python-socketio==5.10.0
 python-engineio==4.8.0
 gunicorn==21.2.0
-eventlet==0.33.3
+eventlet==0.39.0
+greenlet==3.1.1
