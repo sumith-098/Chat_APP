@@ -10,7 +10,7 @@ import base64
 import time
 import uuid
 load_dotenv()
-
+import certifi
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
