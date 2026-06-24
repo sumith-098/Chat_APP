@@ -1,0 +1,535 @@
+:root {
+    --bg-primary: #0a0a0b;
+    --bg-secondary: #131316;
+    --bg-tertiary: #1a1a1f;
+    --bg-hover: #222229;
+    --accent-primary: #00d9ff;
+    --accent-secondary: #7000ff;
+    --accent-gradient: linear-gradient(135deg, #00d9ff 0%, #7000ff 100%);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0ab;
+    --text-muted: #6b6b76;
+    --border-color: #2a2a33;
+    --danger: #ff3366;
+    --success: #00ff9d;
+    --font-main: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --glow-primary: 0 0 20px rgba(0, 217, 255, 0.3);
+    --glow-secondary: 0 0 20px rgba(112, 0, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Animated background with particles */
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(112, 0, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
+}
+
+/* Floating particles */
+.particle {
+    position: absolute;
+    background: var(--accent-gradient);
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle-1 {
+    width: 400px;
+    height: 400px;
+    top: -100px;
+    right: -100px;
+}
+
+.particle-2 {
+    width: 300px;
+    height: 300px;
+    bottom: -50px;
+    left: -50px;
+    background: linear-gradient(135deg, #7000ff, #00d9ff);
+}
+
+.particle-3 {
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, #00d9ff, transparent);
+}
+
+.auth-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 460px;
+    padding: 24px;
+}
+
+/* Glowing card with advanced effects */
+.auth-card {
+    background: rgba(19, 19, 22, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(42, 42, 51, 0.5);
+    border-radius: 32px;
+    padding: 48px;
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(0, 217, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated gradient border */
+.auth-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--accent-gradient);
+    border-radius: 34px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.6s ease;
+}
+
+.auth-card:hover::before {
+    opacity: 0.3;
+}
+
+/* Shimmer effect */
+.auth-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.03),
+        transparent
+    );
+    transform: skewX(-25deg);
+}
+
+/* Animated accent line */
+.accent-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent-gradient);
+    transform: translateX(-100%);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth-header h1 {
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+.auth-header p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+/* Enhanced form inputs */
+.form-group {
+    margin-bottom: 28px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--accent-gradient);
+    border-radius: 6px;
+    opacity: 0.5;
+    transition: all 0.4s ease;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 16px 20px 16px 48px;
+    background: rgba(26, 26, 31, 0.6);
+    border: 2px solid rgba(42, 42, 51, 0.8);
+    border-radius: 16px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(5px);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    background: rgba(26, 26, 31, 0.8);
+    box-shadow: 0 0 0 4px rgba(0, 217, 255, 0.15), 0 0 20px rgba(0, 217, 255, 0.2);
+}
+
+.form-group input:focus + .input-icon {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: var(--glow-primary);
+}
+
+/* Modern button with ripple effect */
+.btn-primary {
+    position: relative;
+    width: 100%;
+    padding: 18px;
+    background: var(--accent-gradient);
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-family: var(--font-main);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(0, 217, 255, 0.4);
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.7s ease;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    left: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 217, 255, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Ripple circles */
+.ripple-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    pointer-events: none;
+}
+
+/* Enhanced footer */
+.auth-footer {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.auth-footer p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.auth-footer a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.auth-footer a::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-gradient);
+    transition: width 0.3s ease;
+}
+
+.auth-footer a:hover {
+    color: var(--accent-secondary);
+    transform: translateY(-2px);
+}
+
+.auth-footer a:hover::before {
+    width: 100%;
+}
+
+/* Error message with animations */
+.error-msg {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    background: rgba(255, 51, 102, 0.1);
+    border: 1px solid rgba(255, 51, 102, 0.3);
+    border-radius: 16px;
+    color: var(--danger);
+    margin-top: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
+    transform-origin: top;
+}
+
+
+
+
+
+/* Decorative elements */
+.auth-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Floating orbs */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.2;
+    animation: float-orb 15s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    top: -200px;
+    right: -200px;
+    background: radial-gradient(circle, #00d9ff, transparent);
+    animation-delay: -2s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    left: -150px;
+    background: radial-gradient(circle, #7000ff, transparent);
+    animation-duration: 20s;
+    animation-delay: -5s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    top: 40%;
+    left: 30%;
+    background: radial-gradient(circle, #ff3366, transparent);
+    opacity: 0.1;
+    animation-duration: 25s;
+}
+
+@keyframes float-orb {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    25% {
+        transform: translate(50px, 50px) scale(1.1);
+    }
+    50% {
+        transform: translate(100px, -50px) scale(0.9);
+    }
+    75% {
+        transform: translate(-50px, 100px) scale(1.2);
+    }
+}
+
+/* GSAP animation initial states */
+.gsap-fade-in {
+    opacity: 0;
+}
+
+.gsap-slide-up {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.gsap-slide-right {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.gsap-slide-left {
+    opacity: 0;
+    transform: translateX(50px);
+}
+
+.gsap-scale-in {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.gsap-rotate-in {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.9);
+}
+
+.gsap-stagger-item {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.gsap-flip-in {
+    opacity: 0;
+    transform: perspective(400px) rotateX(90deg);
+}
+
+.gsap-bounce-in {
+    opacity: 0;
+    transform: scale(0.3);
+}
+
+/* Loading state for button */
+.btn-primary.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.btn-primary.loading .btn-text {
+    opacity: 0;
+}
+
+.btn-primary.loading::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 50%;
+    margin-left: -12px;
+    margin-top: -12px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Success state */
+.btn-primary.success {
+    background: linear-gradient(135deg, #00ff9d, #00d9ff);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 32px 24px;
+    }
+    
+    .auth-header h1 {
+        font-size: 32px;
+    }
+    
+    .orb-1, .orb-2, .orb-3 {
+        opacity: 0.1;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-gradient);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary);
+}

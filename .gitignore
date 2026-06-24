@@ -1,0 +1,21 @@
+# Local Environment Configurations (Crucial for security)
+.env
+instance/
+.env.*
+
+# Python Virtual Environments (Saves upload time)
+venv/
+.venv/
+env/
+ENV/
+pyvenv.cfg
+
+# Python caching systems
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating system files
+Thumbs.db
+.DS_Store
