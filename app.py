@@ -1,3 +1,5 @@
+import eventlet
+eventlet.monkey_patch()
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from flask_socketio import SocketIO, emit
 from flask_cors import CORS
@@ -15,7 +17,9 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 CORS(app)
-socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
+socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='eventlet', 
+    ping_timeout=60, 
+    ping_interval=25)
 
 # Database configuration - UPDATE YOUR PASSWORD HERE
 

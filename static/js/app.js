@@ -1,7 +1,10 @@
 
 
 // ── Socket ────────────────────────────────────────────────────
-const socket = io();
+const socket = io({
+    transports: ['websocket'],
+    upgrade: false
+});
 
 // ── State ─────────────────────────────────────────────────────
 let currentFriend    = null;
