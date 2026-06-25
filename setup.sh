@@ -17,7 +17,7 @@ else
     echo "✗ Python 3 not found. Please install Python 3.8 or higher."
     exit 1
 fi
-
+#dfsn
 # Check MySQL
 echo ""
 echo "Checking MySQL installation..."

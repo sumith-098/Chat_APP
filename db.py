@@ -1,28 +1,40 @@
-import os
-import mysql.connector
-from mysql.connector import Error
-from dotenv import load_dotenv
-
-load_dotenv()
+import pymysql
+import ssl
 import certifi
-# TiDB Cloud ke liye SSL parameters config me add kiye hain
+import os
+
 DB_CONFIG = {
     'host': os.getenv('DB_HOST'),
-    'port': int(os.getenv('DB_PORT', 4000)), # Default port 4000 for TiDB
+    'port': int(os.getenv('DB_PORT', 4000)),
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD'),
     'database': os.getenv('DB_NAME'),
-    'ssl_verify_identity': True,
-    'ssl_ca':  certifi.where() # Render automatic handles system certificates
+    'ssl': {
+        'ca': certifi.where(),
+        'check_hostname': True
+    }
 }
 
 def get_db_connection():
-    try:
-        connection = mysql.connector.connect(**DB_CONFIG)
-        return connection
-    except Error as e:
-        print(f"Error connecting to MySQL: {e}")
-        return None
+    # 1. Establish the pure Python connection
+    connection = pymysql.connect(**DB_CONFIG)
+    
+    # 2. Save the original cursor function
+    original_cursor = connection.cursor
+    
+    # 3. Create a monkey-patch function that intercepts `dictionary=True`
+    def dictionary_cursor_wrapper(*args, **kwargs):
+        # If your code passes dictionary=True, remove it and use PyMySQL's DictCursor
+        if kwargs.pop('dictionary', False) or kwargs.get('cursorclass') is None:
+            kwargs['cursorclass'] = pymysql.cursors.DictCursor
+        return original_cursor(*args, **kwargs)
+    
+    # 4. Override the connection object's cursor method
+    connection.cursor = dictionary_cursor_wrapper
+    
+    return connection
+
+    
 
 def init_db():
     try:

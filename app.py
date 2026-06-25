@@ -17,9 +17,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 CORS(app)
-socketio = SocketIO(app, cors_allowed_origins="*",  async_mode='eventlet', 
-    ping_timeout=60, 
-    ping_interval=25)
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet', ping_timeout=15, ping_interval=5)
+
 
 # Database configuration - UPDATE YOUR PASSWORD HERE
 

@@ -3,7 +3,8 @@
 // ── Socket ────────────────────────────────────────────────────
 const socket = io({
     transports: ['websocket'],
-    upgrade: false
+    upgrade: false,
+    rememberUpgrade: true
 });
 
 // ── State ─────────────────────────────────────────────────────
