@@ -16,22 +16,21 @@ DB_CONFIG = {
 }
 
 def get_db_connection():
-    # 1. Establish the pure Python connection
     connection = pymysql.connect(**DB_CONFIG)
-    
-    # 2. Save the original cursor function
     original_cursor = connection.cursor
     
-    # 3. Create a monkey-patch function that intercepts `dictionary=True`
     def dictionary_cursor_wrapper(*args, **kwargs):
-        # If your code passes dictionary=True, remove it and use PyMySQL's DictCursor
-        if kwargs.pop('dictionary', False) or kwargs.get('cursorclass') is None:
-            kwargs['cursorclass'] = pymysql.cursors.DictCursor
+        # Pop the 'dictionary' flag so it doesn't pass to PyMySQL
+        is_dict = kwargs.pop('dictionary', False)
+        
+        # If dictionary=True was requested, explicitly use PyMySQL's DictCursor
+        if is_dict:
+            return original_cursor(pymysql.cursors.DictCursor)
+        
+        # Otherwise, return a standard tuple cursor
         return original_cursor(*args, **kwargs)
     
-    # 4. Override the connection object's cursor method
     connection.cursor = dictionary_cursor_wrapper
-    
     return connection
 
     
